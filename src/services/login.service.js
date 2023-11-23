@@ -6,9 +6,9 @@ const conn = dbConnection.dbConnection;
 
 const Login = function () { };
 
-Login.getUser = async (userName,userPassword) => {
+Login.getUser = async (userName) => {
     return new Promise(function (resolve, reject) {
-        //check for the user credentials in the database
+        //check for the user name in the database
         var querySelData= 'SELECT '  
                         + 'user_profile.id, '
                         +' user_profile.userId, '
@@ -17,8 +17,7 @@ Login.getUser = async (userName,userPassword) => {
                         + 'user_profile.userEmail, '
                         + 'user_profile.userContactNo ' 
                         + 'FROM `' + environment.DB + '`.user_profile ' 
-                        + 'WHERE user_profile.userId="' + userName + '" AND '
-                        + 'user_profile.userPassword="' + userPassword + '"'; 
+                        + 'WHERE user_profile.userId="' + userName + '" Limit 1'; 
 
         conn.query(querySelData, (err, rows) => {
             if (err) throw err;
