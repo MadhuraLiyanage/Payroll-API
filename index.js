@@ -6,7 +6,7 @@ const environment = require("./config/environment");
 const requestLogger = require('./src/logger/request.logger');
 const logger = require("./src/logger/default.logger");
 const authRouter = require("./src/routes/auth.route")
-
+const whoAmIRouter = require("./src/routes/whoAmI.route")
 //swagger
 const options = {
   definition: {
@@ -54,9 +54,14 @@ if (environment.requestLogEnable){
   logger.info("Request logger disabled")
 }
 
+//Default
+// app.use((req, res,next) => {
+//   res.status(200).json({name:'Payroll RESTful API', author:'Madhura Liyanage'})
+// }); 
+
 //apis
 app.use("/api/v1/auth", authRouter);
-app.use("/api/v1/auth/whoami", authRouter);
+app.use("/api/v1/whoami", whoAmIRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

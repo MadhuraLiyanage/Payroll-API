@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const util = require("../util/common.util")
 const authController = require('../controller/auth/auth.controller');
 /**
  * @swagger
@@ -14,6 +15,9 @@ const authController = require('../controller/auth/auth.controller');
  *              status:
  *                  type: srting
  *                  description: Status of the response 00 sucessful, 99 faild
+ *              message:
+ *                  type: string
+ *                  description: response message
  *              tockenStatus:
  *                  type: string
  *                  description: Status of the tocken
@@ -76,10 +80,5 @@ const authController = require('../controller/auth/auth.controller');
  *              description: Error in processing the request
  */
 router.post('/', authController.user_login);
-
-router.get('/whoami', (req, res) =>{
-
-} )
-
 
 module.exports = router;

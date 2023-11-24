@@ -2,7 +2,6 @@ const { validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
 const loginservice = require("../../services/login.service");
 const env = require("../../../config/environment");
-const { Console } = require('node:console');
 var crypto = require('crypto');
 
 exports.user_login = async (req, res, next) => {
@@ -25,7 +24,7 @@ exports.user_login = async (req, res, next) => {
     
     if (isValidUser.length == 0){
       msg = "Invalid user credentials (user name/password)";
-        status = 200;
+      status = 200;
     } else {
         //convert password to hash
         //hashing to Hex
@@ -49,18 +48,20 @@ exports.user_login = async (req, res, next) => {
             jwtToken = jwt.sign(
                       {
                         id: userName,
+                        userFullName: userFullName,
+                        userEmail: userEmail,
+                        userContactNo: userContactNo,
                         role: 'user',
                       },
                       env.JwtSecret,
                       {
-                        expiresIn: '20m',
+                        expiresIn: env.JwtTokenExp,
                       }
                     );
             msg = "Login Successful"
             status = 200;
           }
     }
-  
     var returnResults = await loginservice.loginReturn({ userName:userName, id:id, userFullName:userFullName, userEmail:userEmail, jwtToken:jwtToken, msg:msg  });
     res.status(status).json(returnResults);
   } catch (error) {

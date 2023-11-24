@@ -18,4 +18,5 @@ module.exports = {
     DBport: "3306",
     Port: "3040",
     JwtSecret: "MadhuraLiyanage", 
+    JwtTokenExp: '20m',
   };
