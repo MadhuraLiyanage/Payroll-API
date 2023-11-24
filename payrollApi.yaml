@@ -39,7 +39,7 @@ paths:
         400:
           description: User error
         404:
-          description: not found
+          description: Not found
         500:
           description: Internal server error
   /api/v1/whoami:
@@ -59,7 +59,7 @@ paths:
         400:
           description: User error
         404:
-          description: not found
+          description: Not found
         500:
           description: Internal server error
 
