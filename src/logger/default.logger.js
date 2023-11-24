@@ -8,7 +8,7 @@ const { combine, timestamp, printf } = format;
 
 
 module.exports = winston.createLogger({
-    level: environment.logLevel,
+    level: process.env.logLevel,
     format: combine(
         format.errors({ stack: true }), // log the full stack
         timestamp(), // get the time stamp part of the full log message

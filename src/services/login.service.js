@@ -1,4 +1,3 @@
-const environment = require("../../config/environment");
 const dbConnection = require("../connections/db.connection");
 const util = require("../util/common.util");
 const conn = dbConnection.dbConnection;
@@ -16,7 +15,7 @@ Login.getUser = async (userName) => {
                         + 'user_profile.userName, '
                         + 'user_profile.userEmail, '
                         + 'user_profile.userContactNo ' 
-                        + 'FROM `' + environment.DB + '`.user_profile ' 
+                        + 'FROM `' + process.env.DB + '`.user_profile ' 
                         + 'WHERE user_profile.userId="' + userName + '" Limit 1'; 
 
         conn.query(querySelData, (err, rows) => {

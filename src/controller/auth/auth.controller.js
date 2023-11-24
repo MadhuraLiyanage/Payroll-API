@@ -1,7 +1,6 @@
 const { validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
 const loginservice = require("../../services/login.service");
-const env = require("../../../config/environment");
 var crypto = require('crypto');
 
 exports.user_login = async (req, res, next) => {
@@ -53,9 +52,9 @@ exports.user_login = async (req, res, next) => {
                         userContactNo: userContactNo,
                         role: 'user',
                       },
-                      env.JwtSecret,
+                      process.env.JwtSecret,
                       {
-                        expiresIn: env.JwtTokenExp,
+                        expiresIn: process.env.JwtTokenExp,
                       }
                     );
             msg = "Login Successful"
