@@ -1,37 +1,40 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const swaggerUI = require("swagger-ui-express");
-const swaggerJsDoc = require("swagger-jsdoc");
 const environment = require("./config/environment");
 const requestLogger = require('./src/logger/request.logger');
 const logger = require("./src/logger/default.logger");
 const authRouter = require("./src/routes/auth.route")
 const whoAmIRouter = require("./src/routes/whoAmI.route")
+const swaggerUI = require("swagger-ui-express");
+const YAML = require('yamljs');
+//const swaggerJsDoc = require("swagger-jsdoc");
+const swaggerJsDocs = YAML.load('./payrollApi.yaml');
 
 //swagger
-const options = {
-  definition: {
-    openapi: "3.0.0",
-    info: {
-      title: "Payroll API",
-      version: "1.0.0",
-      description: "Payroll API - Express"
-    },
-    servers:[
-      {
-        url: "http://localhost:3040"
-      }
-    ]
-  },
-  apis: ["./src/routes/*.js"]
-};
+// const options = {
+//   definition: {
+//     openapi: "3.0.0",
+//     info: {
+//       title: "Payroll API",
+//       version: "1.0.0",
+//       description: "Payroll API - Express"
+//     },
+//     servers:[
+//       {
+//         url: "http://localhost:3040"
+//       }
+//     ]
+//   },
+//   apis: ["./src/routes/*.js"]
+// };
 
-const specs = swaggerJsDoc(options);
+// const specs = swaggerJsDoc(options);
 
 const app = express();
 
-app.use("/swagger", swaggerUI.serve, swaggerUI.setup(specs));
+//app.use("/swagger", swaggerUI.serve, swaggerUI.setup(specs));
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerJsDocs));
 
 app.use(cors());
 app.use(express.json());

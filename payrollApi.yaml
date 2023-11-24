@@ -1,0 +1,151 @@
+swagger: "2.0"
+info:
+  title: Payroll Web API Document
+  description: Payroll RESTful API documentation
+  version: 1.0
+  contact:
+    email: madhuraliyanage1977@gmail.com
+  license:
+    name: Apache 2.0
+    url: "http://apache.org/"
+  servers:
+    -url: "http://localhost:3040/"
+    description: Development server
+    -url: "http://192.168.1.10:4040/"
+    description: Development server
+
+schemes: [http, https]
+
+paths:
+  /api/v1/auth:
+    post: 
+      summary: Authentication endpoint
+      description: User will be authenticated and return access tokens
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+      - in: body
+        name: Auth
+        schema:
+          $ref: "#/components/schemas/AuthIn"
+      responses:
+        200:
+          description: Successful    
+          name: Auth
+          schema:
+            $ref: "#/components/schemas/AuthOut"             
+        400:
+          description: User error
+        404:
+          description: not found
+        500:
+          description: Internal server error
+  /api/v1/whoami:
+    get:    
+      summary: Current user details
+      description: Current user details will be extracted from access token
+      produces:
+        - application/json
+      security:
+        - authentication: []        
+      responses:
+        200:
+          description: Successful    
+          name: Auth
+          schema:
+            $ref: "#/components/schemas/WhoAmIOut"             
+        400:
+          description: User error
+        404:
+          description: not found
+        500:
+          description: Internal server error
+
+securityDefinitions:
+  authentication:
+    type: apiKey
+    name: Authorization
+    in: header
+
+components:
+  schemas:
+    AuthIn:
+      type: object     
+      properties:
+        userName:
+          type: string
+          description: User name
+          required: true
+        password:
+          type: string
+          description: Password
+          required: true
+                  example:
+                    userName: "indu"
+                    password: "sample1"
+    AuthOut:
+      type: object     
+      properties:
+        status:
+          type: srting
+          description: Status of the response 00 sucessful, 99 faild
+        responseMessage:
+          type: string
+          description: response message
+        tockenStatus:
+          type: string
+          description: Status of the tocken
+        userID: 
+          type: string
+          description: Requested user ID
+        data:
+          type: array
+          items: 
+            properties:
+              token:
+                type: string
+                description: JWT token after validation the user
+              id:
+                type: int
+                description: The auto-generated id of the user
+              userName:
+                type: string
+                description: The user name
+              userEmail:
+                type: string
+                description: Email address
+              isUserActive:
+                type: boolean
+                description: User active
+    WhoAmIOut:
+      type: object     
+      properties:
+        status:
+          type: string
+          description: Status of the response 00 sucessful, 99 faild
+        responseMessage:
+          type: string
+          description: response message
+        data:
+          type: array
+          items: 
+            properties:
+              userId:
+                type: string
+                description: JWT token after validation the user
+              id:
+                type: int
+                description: User ID
+              userName:
+                type: string
+                description: User full name
+              userEmail:
+                type: string
+                description: user email address
+              userContactNo:
+                type: string
+                description: User contact number
+
+
