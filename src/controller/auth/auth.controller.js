@@ -51,6 +51,8 @@ exports.user_login = async (req, res, next) => {
                         userEmail: userEmail,
                         userContactNo: userContactNo,
                         role: 'user',
+                        issuer: process.env.issuer,
+                        audience: issuer,
                       },
                       process.env.JwtSecret,
                       {
