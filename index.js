@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const swaggerUI = require("swagger-ui-express");
@@ -7,6 +8,7 @@ const requestLogger = require('./src/logger/request.logger');
 const logger = require("./src/logger/default.logger");
 const authRouter = require("./src/routes/auth.route")
 const whoAmIRouter = require("./src/routes/whoAmI.route")
+
 //swagger
 const options = {
   definition: {

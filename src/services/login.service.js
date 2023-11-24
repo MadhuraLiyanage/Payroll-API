@@ -1,8 +1,6 @@
 const dbConnection = require("../connections/db.connection");
-const util = require("../util/common.util");
 const conn = dbConnection.dbConnection;
-
-
+const env = require("../../config/environment");
 const Login = function () { };
 
 Login.getUser = async (userName) => {
@@ -15,7 +13,7 @@ Login.getUser = async (userName) => {
                         + 'user_profile.userName, '
                         + 'user_profile.userEmail, '
                         + 'user_profile.userContactNo ' 
-                        + 'FROM `' + process.env.DB + '`.user_profile ' 
+                        + 'FROM `' + env.DB + '`.user_profile ' 
                         + 'WHERE user_profile.userId="' + userName + '" Limit 1'; 
 
         conn.query(querySelData, (err, rows) => {
@@ -30,10 +28,12 @@ Login.loginReturn = async (dtSet, result) => {
     return new Promise(function (resolve, reject) {
         //preparing the response with the token
         var data = [];
-        if(dtSet.jwtToken != undefined){
+
+        if(dtSet.accessToken != undefined){
             data = [
                 {
-                    "token": dtSet.jwtToken,
+                    "accessToken": dtSet.accessToken,
+                    "refreshToken": dtSet.refreshToken,
                     "id" : dtSet.id,
                     "userId": dtSet.userName,
                     "userName": dtSet.userFullName,
@@ -43,6 +43,7 @@ Login.loginReturn = async (dtSet, result) => {
                 }
             ]
         }
+
         var retrunValue = {
             "status": "00",
             "tokenStatus": "",

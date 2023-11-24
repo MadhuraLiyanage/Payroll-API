@@ -8,8 +8,7 @@ module.exports = {
     requestLogFormat:
       "[:date[iso]] :method :url :status :response-time ms - :res[content-length]",
     requestLogRollingInterval: process.env.MORGAN_LOG_ROLLING_INTERVAL || "1d",
-  
-   
+ 
     //Payroll DB settings
     DB: "payrolldb",
     DBusername: "root",
@@ -17,6 +16,8 @@ module.exports = {
     DBserver: "localhost",
     DBport: "3306",
     Port: "3040",
-    JwtSecret: "MadhuraLiyanage", 
-    JwtTokenExp: '20m',
+    ACCESS_TOKEN_SECRET: "Madhura@Liyanage",
+    REFRESH_TOKEN_SECRET: "Indu@Liyanage" ,
+    JWT_TOKEN_EXP: "20m",
+    ISSUER: "madhura@srilanka",
   };

@@ -5,7 +5,7 @@ var crypto = require('crypto');
 
 exports.user_login = async (req, res, next) => {
   var error;
-  var jwtToken, status, msg;
+  var accessToken, refreshToken, reqStatus, msg;
   const userName = req.body.userName;
   const password = req.body.password;
   var id = 0;
@@ -16,14 +16,14 @@ exports.user_login = async (req, res, next) => {
   try {
     if (!userName || !password) {
       msg = "Invalid user name/password";
-      status = 200;
+      reqStatus = 200;
     }
     
     var isValidUser = await loginservice.getUser(userName);
     
     if (isValidUser.length == 0){
       msg = "Invalid user credentials (user name/password)";
-      status = 200;
+      resStatus = 200;
     } else {
         //convert password to hash
         //hashing to Hex
@@ -37,37 +37,29 @@ exports.user_login = async (req, res, next) => {
         if (userPassword != hashPassword){
           //Invalid
           msg = "Invalid user credentials (user name/password)";
-          status = 200;
+          resStatus = 200;
         } else {
-          //valied
+          //Valied
             id = isValidUser[0].id;
             userFullName = isValidUser[0].userName;
             userEmail = isValidUser[0].userEmail;
             userContactNo = isValidUser[0].userContactNo;
-            jwtToken = jwt.sign(
-                      {
-                        id: userName,
-                        userFullName: userFullName,
-                        userEmail: userEmail,
-                        userContactNo: userContactNo,
-                        role: 'user',
-                        issuer: process.env.issuer,
-                        audience: issuer,
-                      },
-                      process.env.JwtSecret,
-                      {
-                        expiresIn: process.env.JwtTokenExp,
-                      }
-                    );
+            
+            //get access token
+            accessToken = await getToken(userName, userFullName, userEmail, userContactNo, 'user', process.env.ISSUER, process.env.ACCESS_TOKEN_SECRET, process.env.JWT_TOKEN_EXP);
+            //get refresh token
+            refreshToken = await getToken(userName, userFullName, userEmail, userContactNo, 'user', process.env.ISSUER, process.env.REFRESH_TOKEN_SECRET, process.env.REFRESH_TOKEN_EXP);
+            
             msg = "Login Successful"
-            status = 200;
+            resStatus = 200;
           }
     }
-    var returnResults = await loginservice.loginReturn({ userName:userName, id:id, userFullName:userFullName, userEmail:userEmail, jwtToken:jwtToken, msg:msg  });
-    res.status(status).json(returnResults);
+    var returnResults = await loginservice.loginReturn({ userName:userName, id:id, userFullName:userFullName, userEmail:userEmail, accessToken:accessToken, refreshToken:refreshToken, msg:msg  });
+    
+    res.status(resStatus).json(returnResults);
   } catch (error) {
     console.log(error);
-    res.status(500).json({
+      res.status(500).json({
       status:"99",
       tokenStatus:"",
       userID:userName,
@@ -75,4 +67,25 @@ exports.user_login = async (req, res, next) => {
       data:[]      
     });
   }
-};
+}
+
+getToken = async (userName, userFullName, userEmail, userContactNo, userRole, issuer, tokenSecret, tokenExpiry ) => {
+  return new Promise((resolve, reject) => {
+      const token = jwt.sign(
+        {
+          id: userName,
+          userFullName: userFullName,
+          userEmail: userEmail,
+          userContactNo: userContactNo,
+          role: userRole,
+          issuer: issuer,
+          audience: userName,
+        },
+        tokenSecret,
+        {
+          expiresIn: tokenExpiry,
+        }
+      );
+      resolve(token);
+  })
+}
