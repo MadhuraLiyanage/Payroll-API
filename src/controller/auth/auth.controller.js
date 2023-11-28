@@ -1,7 +1,7 @@
 const { validationResult } = require('express-validator');
-const jwt = require('jsonwebtoken');
 const loginservice = require("../../services/login.service");
 var crypto = require('crypto');
+const jwtHelper = require("../../helpers/jwt.helper")
 
 exports.user_login = async (req, res, next) => {
   var error;
@@ -46,9 +46,9 @@ exports.user_login = async (req, res, next) => {
             userContactNo = isValidUser[0].userContactNo;
             
             //get access token
-            accessToken = await getToken(userName, userFullName, userEmail, userContactNo, 'user', process.env.ISSUER, process.env.ACCESS_TOKEN_SECRET, process.env.JWT_TOKEN_EXP);
+            accessToken = await jwtHelper.getToken(userName, userFullName, userEmail, userContactNo, 'user', process.env.ISSUER, process.env.ACCESS_TOKEN_SECRET, process.env.JWT_TOKEN_EXP);
             //get refresh token
-            refreshToken = await getToken(userName, userFullName, userEmail, userContactNo, 'user', process.env.ISSUER, process.env.REFRESH_TOKEN_SECRET, process.env.REFRESH_TOKEN_EXP);
+            refreshToken = await jwtHelper.getToken(userName, userFullName, userEmail, userContactNo, 'user', process.env.ISSUER, process.env.REFRESH_TOKEN_SECRET, process.env.REFRESH_TOKEN_EXP);
             
             msg = "Login Successful"
             resStatus = 200;
@@ -67,25 +67,4 @@ exports.user_login = async (req, res, next) => {
       data:[]      
     });
   }
-}
-
-getToken = async (userName, userFullName, userEmail, userContactNo, userRole, issuer, tokenSecret, tokenExpiry ) => {
-  return new Promise((resolve, reject) => {
-      const token = jwt.sign(
-        {
-          id: userName,
-          userFullName: userFullName,
-          userEmail: userEmail,
-          userContactNo: userContactNo,
-          role: userRole,
-          issuer: issuer,
-          audience: userName,
-        },
-        tokenSecret,
-        {
-          expiresIn: tokenExpiry,
-        }
-      );
-      resolve(token);
-  })
 }

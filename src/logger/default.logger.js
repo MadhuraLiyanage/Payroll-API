@@ -1,6 +1,5 @@
 const winston = require('winston');
 const DailyRotateFile = require('winston-daily-rotate-file');
-const environment = require('../../config/environment');
  
 // Import all needed using Object Destructuring
 const { createLogger, format, transports } = require("winston");
@@ -8,7 +7,7 @@ const { combine, timestamp, printf } = format;
 
 
 module.exports = winston.createLogger({
-    level: process.env.logLevel,
+    level: process.env.LOG_LEVEL,
     format: combine(
         format.errors({ stack: true }), // log the full stack
         timestamp(), // get the time stamp part of the full log message
@@ -20,8 +19,8 @@ module.exports = winston.createLogger({
     transports: [
         new winston.transports.Console(),
         new DailyRotateFile({
-            filename: environment.logFile,
-            dirname: environment.logDir,
+            filename: process.env.LOG_FILE,
+            dirname: process.env.LOG_DIR,
             datePattern: 'YYYY-MM-DD',
             zippedArchive: true,
             maxFiles: '14d',
@@ -31,4 +30,3 @@ module.exports = winston.createLogger({
 });
 
 
-//const levels = {error: 0, warn: 1,info: 2,http: 3,verbose: 4, debug: 5, silly: 6};

@@ -1,0 +1,7 @@
+::1 - - [Tue, 28 Nov 2023 09:27:57 GMT] "GET /swagger/ HTTP/1.1" 404 69 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
+::1 - - [Tue, 28 Nov 2023 09:28:20 GMT] "GET /swagger/ HTTP/1.1" 404 69 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
+::1 - - [Tue, 28 Nov 2023 09:28:21 GMT] "GET / HTTP/1.1" 404 69 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
+::1 - - [Tue, 28 Nov 2023 09:28:34 GMT] "GET /swagger/ HTTP/1.1" 404 69 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
+::1 - - [Tue, 28 Nov 2023 09:28:37 GMT] "GET /swagger/ HTTP/1.1" 404 69 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
+::1 - - [Tue, 28 Nov 2023 09:28:48 GMT] "GET /api/v1/whoami HTTP/1.1" 500 58 "http://localhost:3040/api-docs/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
+::1 - - [Tue, 28 Nov 2023 09:29:41 GMT] "GET /api/v1/whoami HTTP/1.1" 500 58 "http://localhost:3040/api-docs/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"

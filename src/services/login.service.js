@@ -1,6 +1,5 @@
 const dbConnection = require("../connections/db.connection");
 const conn = dbConnection.dbConnection;
-const env = require("../../config/environment");
 const Login = function () { };
 
 Login.getUser = async (userName) => {
@@ -13,7 +12,7 @@ Login.getUser = async (userName) => {
                         + 'user_profile.userName, '
                         + 'user_profile.userEmail, '
                         + 'user_profile.userContactNo ' 
-                        + 'FROM `' + env.DB + '`.user_profile ' 
+                        + 'FROM `' + process.env.DB_NAME + '`.user_profile ' 
                         + 'WHERE user_profile.userId="' + userName + '" Limit 1'; 
 
         conn.query(querySelData, (err, rows) => {

@@ -1,46 +1,23 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const environment = require("./config/environment");
 const requestLogger = require('./src/logger/request.logger');
 const logger = require("./src/logger/default.logger");
 const authRouter = require("./src/routes/auth.route")
 const whoAmIRouter = require("./src/routes/whoAmI.route")
 const swaggerUI = require("swagger-ui-express");
 const YAML = require('yamljs');
-//const swaggerJsDoc = require("swagger-jsdoc");
 const swaggerJsDocs = YAML.load('./payrollApi.yaml');
-
-//swagger
-// const options = {
-//   definition: {
-//     openapi: "3.0.0",
-//     info: {
-//       title: "Payroll API",
-//       version: "1.0.0",
-//       description: "Payroll API - Express"
-//     },
-//     servers:[
-//       {
-//         url: "http://localhost:3040"
-//       }
-//     ]
-//   },
-//   apis: ["./src/routes/*.js"]
-// };
-
-// const specs = swaggerJsDoc(options);
 
 const app = express();
 
-//app.use("/swagger", swaggerUI.serve, swaggerUI.setup(specs));
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerJsDocs));
 
 app.use(cors());
 app.use(express.json());
 
 //api runing port
-const PORT = environment.Port || 8080
+const PORT = process.env.PORT || 8080
 
 app.use(function (req, res, next){
     res.header("Access-Control-Allow-Origin", "*");
@@ -53,7 +30,7 @@ app.use(function (req, res, next){
 })
 
 
-if (environment.requestLogEnable){
+if (process.env.REQUEST_LOG_ENABLE){
   requestLogger.registerRequestLogger(app);
 } else {
   logger.info("Request logger disabled")

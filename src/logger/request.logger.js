@@ -1,17 +1,16 @@
 const morgan = require('morgan');
 const rfs = require('rotating-file-stream');
-const environment = require('../../config/environment');
 
 // rotating stream for morgan
-const accessLogStream = rfs.createStream(environment.requestLogFile, {
+const accessLogStream = rfs.createStream(process.env.REQUEST_LOG_FILE, {
     size: "10M",
-    interval: environment.requestLogRollingInterval,
-    path: environment.logDir
+    interval: process.env.REQUEST_LOG_ROLLING_INTERVAL,
+    path: process.env.LOG_DIR
 });
 
 // appenders for printing the logs to console and file
-const consoleAppender = morgan(environment.requestLogFormat);
-const fileAppender = morgan(environment.requestLogFormat, {
+const consoleAppender = morgan(process.env.REQUEST_LOG_FORMAT);
+const fileAppender = morgan(process.env.REQUEST_LOG_FORMAT, {
     stream: accessLogStream
 });
 
@@ -20,7 +19,7 @@ exports.registerRequestLogger = (app) => {
     app.use(consoleAppender);
 
     // log to file only in `production`
-    if (environment.nodeEnv === 'production') {
+    if (process.env.NODE_ENV === 'production') {
         app.use(fileAppender);
     }
 };

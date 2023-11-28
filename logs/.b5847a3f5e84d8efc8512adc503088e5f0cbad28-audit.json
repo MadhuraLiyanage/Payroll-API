@@ -29,6 +29,21 @@
             "date": 1700805816070,
             "name": "logs\\payroll.log.2023-11-24",
             "hash": "51520b6857b0f7399b1dcb48e4e6a7afafcdaa66ad828a11dbea8dea8d9ebae6"
+        },
+        {
+            "date": 1700981340069,
+            "name": "logs\\payroll.log.2023-11-26",
+            "hash": "1b26327cd7178741ab27b743596c946fa8fdc1a0b0c2dbccf1d94c119b1f1afd"
+        },
+        {
+            "date": 1701102086851,
+            "name": "logs\\payroll.log.2023-11-27",
+            "hash": "a4a92f1d758e3d0e47642ed689a47ef82e2ad3a863856216ec16a0a84b133565"
+        },
+        {
+            "date": 1701161932684,
+            "name": "logs\\payroll.log.2023-11-28",
+            "hash": "084734752dc2563678ab4c39c0d01d5dd539459974f873fa4bf146a1890ec17e"
         }
     ],
     "hashType": "sha256"
