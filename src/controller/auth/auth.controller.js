@@ -21,7 +21,7 @@ exports.user_login = async (req, res, next) => {
     
     var isValidUser = await loginservice.getUser(userName);
     
-    if (isValidUser.length == 0){
+    if (isValidUser.length == 0){      
       msg = "Invalid user credentials (user name/password)";
       resStatus = 200;
     } else {
