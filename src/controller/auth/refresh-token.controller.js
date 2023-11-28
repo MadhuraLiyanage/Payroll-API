@@ -31,7 +31,7 @@ exports.gerNewToken = async (req, res, next) => {
             }]
             res.status(200).json({status:"00", responseMessage:"Sucessful", data: data});
     
-        } catch {
+        } catch (err) {
             res.status(200).json({status: "99", responseMessage: "Error creating access token using refresh token.", data: []})
         }
     }

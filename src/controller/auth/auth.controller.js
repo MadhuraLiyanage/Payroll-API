@@ -58,7 +58,6 @@ exports.user_login = async (req, res, next) => {
     
     res.status(resStatus).json(returnResults);
   } catch (error) {
-    console.log(error);
       res.status(500).json({
       status:"99",
       tokenStatus:"",
