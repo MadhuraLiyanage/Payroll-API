@@ -43,11 +43,12 @@ if (process.env.REQUEST_LOG_ENABLE){
 
 //apis
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/auth/refresh-token", authRouter);
 app.use("/api/v1/whoami", whoAmIRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-    const err = new Error("Error loading RESTful API endpoint. Endpoint not found.");
+    const err = new Error("Payroll RESTfull API. Error loading requested endpoint. Endpoint not found.");
     err.httpStatusCode = 404;
     return next(err);
 });
@@ -60,6 +61,6 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(PORT, () => {
-    logger.info(`server listen in ${PORT} and service started`);
+    logger.info(`Server listning to port ${PORT} and service started`);
 });
   

@@ -1,7 +1,7 @@
 const { validationResult } = require('express-validator');
 const loginservice = require("../../services/login.service");
 var crypto = require('crypto');
-const jwtHelper = require("../../helpers/jwt.helper")
+const jwtHelper = require("../../helpers/jwt.helper")``
 
 exports.user_login = async (req, res, next) => {
   var error;
