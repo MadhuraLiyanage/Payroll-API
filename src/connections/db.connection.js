@@ -11,5 +11,5 @@ dbConnection.connect((err) => {
   if (err) throw err;
   console.log('Successfully connected to database (' + process.env.DB_NAME + ' on ' + process.env.DB_SERVER + ').');
 });
-//test comment
+
 module.exports.dbConnection = dbConnection;
