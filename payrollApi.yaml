@@ -8,18 +8,20 @@ info:
   license:
     name: Apache 2.0
     url: "http://apache.org/"
-  servers:
-    -url: "http://localhost:3040/"
-    description: Development server
-    -url: "http://192.168.1.10:4040/"
-    description: Development server
 
-schemes: [http, https]
+
+host: "localhost:3040"
+basePath: /api/v1
+schemes: 
+  - http
+  - https
 
 paths:
-  /api/v1/auth:
+  /auth:
     post: 
       summary: Authentication endpoint
+      tags:
+        - authorization
       description: User will be authenticated and return access tokens
       produces:
         - application/json
@@ -45,6 +47,8 @@ paths:
   /api/v1/auth/refresh-token:
     post: 
       summary: Generate new tokens
+      tags:
+        - authorization
       description: Generate new access token and refresh token using old refresh token, when access token expires
       produces:
         - application/json
@@ -67,9 +71,11 @@ paths:
           description: Not found
         500:
           description: Internal server error
-  /api/v1/whoami:
+  /api/v1/who-am-i:
     get:    
       summary: Current user details
+      tags:
+        - who-am-i      
       description: Current user details will be extracted from access token
       produces:
         - application/json
@@ -192,7 +198,7 @@ components:
                 type: string
                 description: JWT token after validation the user
               id:
-                type: int
+                type: integer
                 description: User ID
               userName:
                 type: string

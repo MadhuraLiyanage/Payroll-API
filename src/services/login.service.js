@@ -5,6 +5,7 @@ const Login = function () { };
 Login.getUser = async (userName) => {
     return new Promise(function (resolve, reject) {
         //check for the user name in the database
+        
         var querySelData= 'SELECT '  
                         + 'user_profile.id, '
                         +' user_profile.userId, '
@@ -14,7 +15,7 @@ Login.getUser = async (userName) => {
                         + 'user_profile.userContactNo ' 
                         + 'FROM `' + process.env.DB_NAME + '`.user_profile ' 
                         + 'WHERE user_profile.userId="' + userName + '" Limit 1'; 
-
+                        
         conn.query(querySelData, (err, rows) => {
             if (err) throw err;
             resolve(rows)

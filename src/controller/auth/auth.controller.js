@@ -12,13 +12,13 @@ exports.user_login = async (req, res, next) => {
   var userFullName = '';
   var userEmail ='';
   var userContactNo = '';
-
+  
   try {
     if (!userName || !password) {
       msg = "Invalid user name/password";
       reqStatus = 200;
     }
-    
+ 
     var isValidUser = await loginservice.getUser(userName);
     
     if (isValidUser.length == 0){      

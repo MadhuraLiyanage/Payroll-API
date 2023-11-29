@@ -44,7 +44,7 @@ if (process.env.REQUEST_LOG_ENABLE){
 //apis
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/auth/refresh-token", authRouter);
-app.use("/api/v1/whoami", whoAmIRouter);
+app.use("/api/v1/who-am-i", whoAmIRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
