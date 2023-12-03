@@ -1,9 +1,12 @@
 const jwt = require('jsonwebtoken');
 const jwtHelper = function () { };
 const createError = require("http-errors");
+const redis = require('redis');
+
 
 jwtHelper.getToken = async (userName, userFullName, userEmail, userContactNo, userRole, issuer, tokenSecret, tokenExpiry ) => {
     return new Promise((resolve, reject) => {
+      try{
         const token = jwt.sign(
           {
             id: userName,
@@ -20,6 +23,10 @@ jwtHelper.getToken = async (userName, userFullName, userEmail, userContactNo, us
           }
         );
         resolve(token);
+      } catch (err) {
+        throw err;
+      }
+        
     })
   }
 
@@ -27,7 +34,7 @@ jwtHelper.getToken = async (userName, userFullName, userEmail, userContactNo, us
     return new Promise((resolve, reject) => {
       jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, payload)=> {
         if (err) {
-          return rejeact(createError.Unauthorized());
+          throw err;
         }
         else {
           const id = payload.id;

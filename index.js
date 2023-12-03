@@ -8,8 +8,10 @@ const whoAmIRouter = require("./src/routes/whoAmI.route")
 const swaggerUI = require("swagger-ui-express");
 const YAML = require('yamljs');
 const swaggerJsDocs = YAML.load('./payrollApi.yaml');
+const responseTime = require('response-time');
 
 const app = express();
+app.use(responseTime());
 
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerJsDocs));
 

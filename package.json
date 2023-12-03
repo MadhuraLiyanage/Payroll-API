@@ -23,6 +23,8 @@
     "morgan": "^1.10.0",
     "mssql": "^10.0.1",
     "mysql": "^2.18.1",
+    "redis": "^4.6.11",
+    "response-time": "^2.3.2",
     "rotating-file-stream": "^3.1.1",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.0",

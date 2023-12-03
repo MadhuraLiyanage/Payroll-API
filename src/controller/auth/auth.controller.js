@@ -1,7 +1,9 @@
 const { validationResult } = require('express-validator');
 const loginservice = require("../../services/login.service");
 var crypto = require('crypto');
-const jwtHelper = require("../../helpers/jwt.helper")
+const jwtHelper = require("../../helpers/jwt.helper");
+const redisHelper = require("../../helpers/redis.helper")
+
 
 exports.user_login = async (req, res, next) => {
   var error;
@@ -49,7 +51,9 @@ exports.user_login = async (req, res, next) => {
             accessToken = await jwtHelper.getToken(userName, userFullName, userEmail, userContactNo, 'user', process.env.ISSUER, process.env.ACCESS_TOKEN_SECRET, process.env.JWT_TOKEN_EXP);
             //get refresh token
             refreshToken = await jwtHelper.getToken(userName, userFullName, userEmail, userContactNo, 'user', process.env.ISSUER, process.env.REFRESH_TOKEN_SECRET, process.env.REFRESH_TOKEN_EXP);
-            
+            //store in redis store
+            redisHelper.setRefreshTocken(userName, refreshToken);
+
             msg = "Login Successful"
             resStatus = 200;
           }
