@@ -6,11 +6,6 @@
     "auditLog": "logs\\.b5847a3f5e84d8efc8512adc503088e5f0cbad28-audit.json",
     "files": [
         {
-            "date": 1700399384428,
-            "name": "logs\\payroll.log.2023-11-19",
-            "hash": "34e3f970c367be6c18dd41a6030a00922daa6ffdac84b5eebf27936d8ee066df"
-        },
-        {
             "date": 1700575826833,
             "name": "logs\\payroll.log.2023-11-21",
             "hash": "645198d9c4408164377307fa9c440a55812c098fb6b1f767a0cf2ea662c4cf65"
@@ -49,6 +44,11 @@
             "date": 1701241191318,
             "name": "logs\\payroll.log.2023-11-29",
             "hash": "a8b1d33bd5f58eac78ca91846cbe6f670e1eed611ab84ee9241390f41091c6fe"
+        },
+        {
+            "date": 1701621581351,
+            "name": "logs\\payroll.log.2023-12-03",
+            "hash": "cab3fe24940c61589151cba7272d979619025949dbc6efbb94fa577d3125f6fa"
         }
     ],
     "hashType": "sha256"

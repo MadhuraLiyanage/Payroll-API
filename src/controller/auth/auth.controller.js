@@ -16,6 +16,7 @@ exports.user_login = async (req, res, next) => {
   var userContactNo = '';
   
   try {
+
     if (!userName || !password) {
       msg = "Invalid user name/password";
       reqStatus = 200;
@@ -46,13 +47,15 @@ exports.user_login = async (req, res, next) => {
             userFullName = isValidUser[0].userName;
             userEmail = isValidUser[0].userEmail;
             userContactNo = isValidUser[0].userContactNo;
-            
+
             //get access token
             accessToken = await jwtHelper.getToken(userName, userFullName, userEmail, userContactNo, 'user', process.env.ISSUER, process.env.ACCESS_TOKEN_SECRET, process.env.JWT_TOKEN_EXP);
             //get refresh token
             refreshToken = await jwtHelper.getToken(userName, userFullName, userEmail, userContactNo, 'user', process.env.ISSUER, process.env.REFRESH_TOKEN_SECRET, process.env.REFRESH_TOKEN_EXP);
             //store in redis store
-            redisHelper.setRefreshTocken(userName, refreshToken);
+            //Refresh tokens will be saved under RefreshTokens branch
+            const redisToken = "PayrollRefreshTokens:" + userName
+            redisHelper.setRefreshTocken(redisToken, refreshToken);
 
             msg = "Login Successful"
             resStatus = 200;
