@@ -29,7 +29,7 @@ exports.user_login = async (req, res, next) => {
       //convert password to hash
       //hashing to Hex
       //const hashPassword = crypto.createHash('md5').update(password).digest('hex')
-      //Hashing to base64 (binnary)
+      //Hashing to base64 (binary)
       const hashPassword = crypto
         .createHash("md5")
         .update(password, "binary")
@@ -43,7 +43,7 @@ exports.user_login = async (req, res, next) => {
         msg = "Invalid user credentials (user name/password)";
         resStatus = 200;
       } else {
-        //Valied
+        //Valid
         id = isValidUser[0].id;
         userFullName = isValidUser[0].userName;
         userEmail = isValidUser[0].userEmail;
@@ -74,7 +74,13 @@ exports.user_login = async (req, res, next) => {
         //store in redis store
         //Refresh tokens will be saved under RefreshTokens branch
         const redisToken = "PayrollRefreshTokens:" + userName;
-        redisHelper.setRefreshTocken(redisToken, refreshToken);
+        //Delete existing refresh token
+        try {
+          redisHelper.deleteRefreshToken(redisToken);
+        } catch {
+          //ignore errors
+        }
+        redisHelper.setRefreshToken(redisToken, refreshToken);
 
         msg = "Login Successful";
         resStatus = 200;
@@ -87,7 +93,7 @@ exports.user_login = async (req, res, next) => {
       userEmail: userEmail,
       accessToken: accessToken,
       refreshToken: refreshToken,
-      msg: msg,
+      msg: msg
     });
 
     res.status(resStatus).json(returnResults);
@@ -98,7 +104,7 @@ exports.user_login = async (req, res, next) => {
       userID: userName,
       responseMessage:
         "Error authenticating user. Please check the credentials and try again.",
-      data: [],
+      data: []
     });
   }
 };

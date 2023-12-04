@@ -44,7 +44,7 @@ paths:
           description: Not found
         500:
           description: Internal server error
-  /api/v1/auth/refresh-token:
+  /auth/refresh-token:
     post: 
       summary: Generate new tokens
       tags:
@@ -71,7 +71,7 @@ paths:
           description: Not found
         500:
           description: Internal server error
-  /api/v1/who-am-i:
+  /who-am-i:
     get:    
       summary: Current user details
       tags:
@@ -120,14 +120,14 @@ components:
       type: object     
       properties:
         status:
-          type: srting
-          description: Status of the response 00 sucessful, 99 faild
+          type: string
+          description: Status of the response 00 successful, 99 failed
         responseMessage:
           type: string
           description: response message
-        tockenStatus:
+        tokenStatus:
           type: string
-          description: Status of the tocken
+          description: Status of the token
         userID: 
           type: string
           description: Requested user ID
@@ -166,8 +166,8 @@ components:
       type: object     
       properties:
         status:
-          type: srting
-          description: Status of the response 00 sucessful, 99 faild
+          type: string
+          description: Status of the response 00 successful, 99 failed
         responseMessage:
           type: string
           description: response message
@@ -177,7 +177,7 @@ components:
             properties:
               accessToken:
                 type: string
-                description: New JWT acccess token generated using old refresh token
+                description: New JWT access token generated using old refresh token
               refreshToken:
                 type: string
                 description: New JWT refresh token generated using old refresh token
@@ -186,7 +186,7 @@ components:
       properties:
         status:
           type: string
-          description: Status of the response 00 sucessful, 99 faild
+          description: Status of the response 00 successful, 99 failed
         responseMessage:
           type: string
           description: response message

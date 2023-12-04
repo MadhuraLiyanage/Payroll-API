@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const jwtHelper = function () {};
-const createError = require("http-errors");
-const redis = require("redis");
+//const createError = require("http-errors");
+const redisHelper = require("../helpers/redis.helper");
 
 jwtHelper.getToken = async (
   userName,
@@ -23,11 +23,11 @@ jwtHelper.getToken = async (
           userContactNo: userContactNo,
           role: userRole,
           issuer: issuer,
-          audience: userName,
+          audience: userName
         },
         tokenSecret,
         {
-          expiresIn: tokenExpiry,
+          expiresIn: tokenExpiry
         }
       );
       resolve(token);
@@ -37,12 +37,12 @@ jwtHelper.getToken = async (
   });
 };
 
-jwtHelper.veryfyRefreshToken = async (refreshToken) => {
+jwtHelper.verifyRefreshToken = async (refreshToken) => {
   return new Promise((resolve, reject) => {
     jwt.verify(
       refreshToken,
       process.env.REFRESH_TOKEN_SECRET,
-      (err, payload) => {
+      async (err, payload) => {
         if (err) {
           throw err;
         } else {
@@ -52,18 +52,30 @@ jwtHelper.veryfyRefreshToken = async (refreshToken) => {
           const userContactNo = payload.userContactNo;
           const role = payload.userRole;
           const audience = payload.userName;
-          //blacl listing to be done
+
+          //Black listing to be done
+          if (
+            !(await redisHelper.validateRefreshToken(
+              id,
+              refreshToken,
+              "PayrollRefreshTokens:"
+            ))
+          ) {
+            reject();
+          }
+
           resolve({
             id: id,
             userFullName: userFullName,
             userEmail: userEmail,
             userContactNo: userContactNo,
             role: role,
-            audience: audience,
+            audience: audience
           });
         }
       }
     );
   });
 };
+
 module.exports = jwtHelper;
