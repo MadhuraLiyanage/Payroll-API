@@ -39,15 +39,10 @@ if (process.env.REQUEST_LOG_ENABLE) {
   logger.info("Request logger disabled");
 }
 
-//Default
-// app.use((req, res,next) => {
-//   res.status(200).json({name:'Payroll RESTful API', author:'Madhura Liyanage'})
-// });
-
-//apis
+//api endpoints
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/auth/refresh-token", authRouter);
-//app.use("/api/v1/logout", logoutRouter);
+app.use("/api/v1/log-out", logoutRouter);
 app.use("/api/v1/who-am-i", authenticateMiddleware, whoAmIRouter);
 
 // catch 404 and forward to error handler

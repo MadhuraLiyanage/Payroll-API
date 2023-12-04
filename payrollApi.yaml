@@ -71,6 +71,33 @@ paths:
           description: Not found
         500:
           description: Internal server error
+  /log-out:
+    post: 
+      summary: Logout
+      tags:
+        - authorization
+      description: Black list refresh token details
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+      - in: body
+        name: Logout
+        schema:
+          $ref: "#/components/schemas/RefreshTokenIn"
+      responses:
+        200:
+          description: Successful    
+          name: Logout
+          schema:
+            $ref: "#/components/schemas/RefreshTokenOut"             
+        400:
+          description: User error
+        404:
+          description: Not found
+        500:
+          description: Internal server error 
   /who-am-i:
     get:    
       summary: Current user details

@@ -1,7 +1,7 @@
-// const express = require("express");
-// const router = express.Router();
-// const whoAmIController = require("../controller/auth/logout.controller");
+const express = require("express");
+const router = express.Router();
+const logoutController = require("./../controller/auth/logout.controller");
 
-// router.get("/", whoAmIController.jwtDetails);
+router.post("/", logoutController.logoutUser);
 
-// module.exports = router;
+module.exports = router;

@@ -60,7 +60,7 @@ exports.getNewToken = async (req, res, next) => {
       res.status(200).json({
         status: "99",
         responseMessage:
-          "Error creating new access tokens using refresh token.",
+          "Refresh token black listed. Error creating new access tokens using refresh token.",
         data: []
       });
     }
