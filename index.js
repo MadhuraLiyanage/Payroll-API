@@ -5,6 +5,8 @@ const requestLogger = require("./src/logger/request.logger");
 const logger = require("./src/logger/default.logger");
 const authRouter = require("./src/routes/auth.route");
 const whoAmIRouter = require("./src/routes/whoAmI.route");
+const logoutRouter = require("./src/routes/logout.route");
+const authenticateMiddleware = require("./src/middleware/authenticate.mw");
 const swaggerUI = require("swagger-ui-express");
 const YAML = require("yamljs");
 const swaggerJsDocs = YAML.load("./payrollApi.yaml");
@@ -18,7 +20,7 @@ app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerJsDocs));
 app.use(cors());
 app.use(express.json());
 
-//api runing port
+//api running port
 const PORT = process.env.PORT || 8080;
 
 app.use(function (req, res, next) {
@@ -45,7 +47,8 @@ if (process.env.REQUEST_LOG_ENABLE) {
 //apis
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/auth/refresh-token", authRouter);
-app.use("/api/v1/who-am-i", whoAmIRouter);
+//app.use("/api/v1/logout", logoutRouter);
+app.use("/api/v1/who-am-i", authenticateMiddleware, whoAmIRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

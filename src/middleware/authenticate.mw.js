@@ -5,7 +5,7 @@ module.exports = (req, res, next) => {
   if (!authHeader) {
     res.status(401).json({
       status: "99",
-      responsemessage: "Unauthorized request. Invalid access token.",
+      responseMessage: "Unauthorized request. Invalid access token."
     });
   } else {
     const token = authHeader.split(" ")[1];
@@ -16,7 +16,7 @@ module.exports = (req, res, next) => {
     } catch (error) {
       res.status(401).json({
         status: "99",
-        responsemessage: "Unauthorized request. Invalid access token.",
+        responseMessage: "Unauthorized request. Invalid access token."
       });
     }
   }

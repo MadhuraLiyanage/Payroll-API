@@ -1,5 +1,5 @@
 const util = require("../../helpers/common.helper");
-const auth = require("../../middleware/authenticate.mw");
+//const auth = require("../../middleware/authenticate.mw");
 
 exports.jwtDetails = async (req, res, next) => {
   try {
@@ -13,8 +13,8 @@ exports.jwtDetails = async (req, res, next) => {
           userId: decodedJwt.id,
           userName: decodedJwt.userFullName,
           userEmail: decodedJwt.userEmail,
-          userContactNo: decodedJwt.userContactNo,
-        },
+          userContactNo: decodedJwt.userContactNo
+        }
       ];
     }
     res

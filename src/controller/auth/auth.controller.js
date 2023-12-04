@@ -1,5 +1,5 @@
 const { validationResult } = require("express-validator");
-const loginservice = require("../../services/login.service");
+const loginService = require("../../services/login.service");
 var crypto = require("crypto");
 const jwtHelper = require("../../helpers/jwt.helper");
 const redisHelper = require("../../helpers/redis.helper");
@@ -20,7 +20,7 @@ exports.user_login = async (req, res, next) => {
       reqStatus = 200;
     }
 
-    var isValidUser = await loginservice.getUser(userName);
+    var isValidUser = await loginService.getUser(userName);
 
     if (isValidUser.length == 0) {
       msg = "Invalid user credentials (user name/password)";
@@ -86,7 +86,7 @@ exports.user_login = async (req, res, next) => {
         resStatus = 200;
       }
     }
-    var returnResults = await loginservice.loginReturn({
+    var returnResults = await loginService.loginReturn({
       userName: userName,
       id: id,
       userFullName: userFullName,
