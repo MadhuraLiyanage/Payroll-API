@@ -5,9 +5,30 @@ const promisify = require("util.promisify");
 //const { promisify } = require('util');
 const redisHelper = function () {};
 
+/* Redis pa
+//Passing user name and password to redis
+//URL Base 
+//redis://arbitrary_usrname:password@ipaddress:6379/0
+//
+//SSL
+//rediss://:password=@redis-server-url:6380/0?ssl_cert_reqs=CERT_REQUIRED'
+//
+//Connecting to the local host
 const client = redis.createClient({
-  host: process.env.REDIS_SERVER,
-  port: process.env.REDIS_PORT
+  host: "localhost",
+  port: 6379,
+  password: "1234",
+  user: "username"
+});
+*/
+
+const client = redis.createClient({
+  url:
+    process.env.REDIS_ENVIRONMENT === "DOCKER" ? process.env.REDIS_URL : null,
+  port:
+    process.env.REDIS_ENVIRONMENT === "LOCAL" ? process.env.REDIS_PORT : null,
+  host:
+    process.env.REDIS_ENVIRONMENT === "LOCAL" ? process.env.REDIS_SERVER : null
 });
 
 (async () => {
@@ -51,13 +72,16 @@ redisHelper.validateRefreshToken = async (
   return new Promise(async (resolve, reject) => {
     try {
       const redisStoredRefreshToken = await client.GET(redisBranch + userId);
-      if (refreshToken === redisStoredRefreshToken) {
-        resolve(true);
-        return;
-      } else {
-        resolve(false);
-        return;
-      }
+      const result = refreshToken === redisStoredRefreshToken;
+      // if (refreshToken === redisStoredRefreshToken) {
+      //   resolve(true);
+      //   return;
+      // } else {
+      //   resolve(false);
+      //   return;
+      // }
+      resolve(result);
+      return;
     } catch (err) {
       console.log(err);
       throw err;

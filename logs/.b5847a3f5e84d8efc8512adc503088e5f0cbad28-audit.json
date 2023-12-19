@@ -6,54 +6,24 @@
     "auditLog": "logs\\.b5847a3f5e84d8efc8512adc503088e5f0cbad28-audit.json",
     "files": [
         {
-            "date": 1700575826833,
-            "name": "logs\\payroll.log.2023-11-21",
-            "hash": "645198d9c4408164377307fa9c440a55812c098fb6b1f767a0cf2ea662c4cf65"
+            "date": 1702452703315,
+            "name": "logs\\payroll.log.2023-12-13",
+            "hash": "aab289d81e2ef55cf45538a66565a3956487a2fb57bebba7bfc16903e48e0834"
         },
         {
-            "date": 1700671229034,
-            "name": "logs\\payroll.log.2023-11-22",
-            "hash": "e84c965c855d25b8492c418f74d7dae34668a12107f0c6a52275e189db54abc8"
+            "date": 1702723798513,
+            "name": "logs\\payroll.log.2023-12-16",
+            "hash": "d72d536a55f21997243d643fc32137634c7b79fb083825f4943c8df01c45533f"
         },
         {
-            "date": 1700746533306,
-            "name": "logs\\payroll.log.2023-11-23",
-            "hash": "5753149ee5cce15956dc5ec5b0e9191b16a85e4d1ad2d13e804c1cf624aece07"
+            "date": 1702887555386,
+            "name": "logs\\payroll.log.2023-12-18",
+            "hash": "3d1fff44d1fe4189846649de5228fad09d15b3d50e3ec0eb9be17f2ba5723685"
         },
         {
-            "date": 1700805816070,
-            "name": "logs\\payroll.log.2023-11-24",
-            "hash": "51520b6857b0f7399b1dcb48e4e6a7afafcdaa66ad828a11dbea8dea8d9ebae6"
-        },
-        {
-            "date": 1700981340069,
-            "name": "logs\\payroll.log.2023-11-26",
-            "hash": "1b26327cd7178741ab27b743596c946fa8fdc1a0b0c2dbccf1d94c119b1f1afd"
-        },
-        {
-            "date": 1701102086851,
-            "name": "logs\\payroll.log.2023-11-27",
-            "hash": "a4a92f1d758e3d0e47642ed689a47ef82e2ad3a863856216ec16a0a84b133565"
-        },
-        {
-            "date": 1701161932684,
-            "name": "logs\\payroll.log.2023-11-28",
-            "hash": "084734752dc2563678ab4c39c0d01d5dd539459974f873fa4bf146a1890ec17e"
-        },
-        {
-            "date": 1701241191318,
-            "name": "logs\\payroll.log.2023-11-29",
-            "hash": "a8b1d33bd5f58eac78ca91846cbe6f670e1eed611ab84ee9241390f41091c6fe"
-        },
-        {
-            "date": 1701621581351,
-            "name": "logs\\payroll.log.2023-12-03",
-            "hash": "cab3fe24940c61589151cba7272d979619025949dbc6efbb94fa577d3125f6fa"
-        },
-        {
-            "date": 1701666992554,
-            "name": "logs\\payroll.log.2023-12-04",
-            "hash": "97fdf3f7427d2a6b44569616314a0232ce7046b4f0b06c1c8dea5b5e95f1d3b6"
+            "date": 1702992631294,
+            "name": "logs\\payroll.log.2023-12-19",
+            "hash": "32397478472094f1b0882e9510a7647c14d22cb054021fe1c8f6f976da513889"
         }
     ],
     "hashType": "sha256"

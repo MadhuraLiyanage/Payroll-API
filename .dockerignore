@@ -1,0 +1,6 @@
+**/.dockerignore
+**/.vs
+**/.vscode
+**/node_modules
+LICENSE
+README.md

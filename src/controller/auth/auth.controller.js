@@ -3,6 +3,7 @@ const loginService = require("../../services/login.service");
 var crypto = require("crypto");
 const jwtHelper = require("../../helpers/jwt.helper");
 const redisHelper = require("../../helpers/redis.helper");
+const sha256 = require("sha256");
 
 exports.user_login = async (req, res, next) => {
   var error;
@@ -26,14 +27,21 @@ exports.user_login = async (req, res, next) => {
       msg = "Invalid user credentials (user name/password)";
       resStatus = 200;
     } else {
-      //convert password to hash
-      //hashing to Hex
-      //const hashPassword = crypto.createHash('md5').update(password).digest('hex')
-      //Hashing to base64 (binary)
+      //convert password to hash using SHA256/MD5
+
+      //SHA256 conversion
+      const sha256 = require("sha256");
+      sha256(password); // 9cca070334...
       const hashPassword = crypto
-        .createHash("md5")
-        .update(password, "binary")
-        .digest("base64");
+        .createHash("sha256")
+        .update(password)
+        .digest("hex");
+
+      //MD5 conversion
+      // const hashPassword = crypto
+      //   .createHash("md5")
+      //   .update(password, "binary")
+      //   .digest("base64");
 
       //Validate password
       const userPassword = isValidUser[0].userPassword;
@@ -75,6 +83,7 @@ exports.user_login = async (req, res, next) => {
         //Refresh tokens will be saved under RefreshTokens branch
         const redisToken = "PayrollRefreshTokens:" + userName;
         //Delete existing refresh token
+
         try {
           redisHelper.deleteRefreshToken(redisToken);
         } catch {

@@ -26,6 +26,7 @@
     "redis": "^4.6.11",
     "response-time": "^2.3.2",
     "rotating-file-stream": "^3.1.1",
+    "sha256": "^0.2.0",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.0",
     "util.promisify": "^1.1.2",
