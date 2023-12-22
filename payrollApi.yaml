@@ -12,9 +12,7 @@ info:
 
 host: "localhost:3040"
 basePath: /api/v1
-schemes: 
-  - http
-  - https
+schemes: [http, https]
 
 paths:
   /auth:
